@@ -5,10 +5,10 @@ This API local server developed using python-django web framework. This project 
 1. install python3, virtualenv for local environment.
 
 2. setup local environment with virtualenv
-    a. "virtualenv -p python3 venv"
+    "virtualenv -p python3 venv"
 
 3. activate your local environment
-    a. "source venv/bin/activate"
+    "source venv/bin/activate"
 
 4. create local mysql database. If not, you can modify at <project>/friend_management/settings.py
     database_name: friend_management
