@@ -1,0 +1,192 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <link rel="shortcut icon" href="{% static 'theme-clm/img/favicon.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'theme-clm/img/favicon.png' %}">
+
+    <title>{% block title %}Optimus - Lazada{% endblock %}</title>
+    <!-- Bootstrap -->
+    <link href="{% static 'theme-clm/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'theme-clm/css/bootstrap-table.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'theme-clm/css/bootstrap-datepicker3.css' %}">
+    <!-- Custom styles for this template -->
+    <style>
+        body {
+            zoom: 0.8; /* Other non-webkit browsers */
+            zoom: 80%; /* Webkit browsers */
+        }
+
+        /* mozilla does not zoom. so, we need to use scale. scale will transform
+        whole viewport. so, we need to recalculate width and height */
+        @-moz-document url-prefix() {
+          body {
+            -moz-transform: scale(0.8);
+            -moz-transform-origin: left top;
+            width: 125%;
+            height: 125%;
+          }
+        }
+
+        .navbar {
+            margin-bottom: 10px;
+        }
+
+        .page-header {
+            margin-top: 0px;
+            margin-bottom: 10px;
+            margin-left: 15px;
+            margin-right: 15px;
+            padding-top: 5px;
+            padding-bottom: 0px;
+            padding-left: 10px;
+            padding-right: 10px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            border-radius: 6px;
+        }
+
+        .bg-default {
+            background-color: #eeeeee;
+        }
+
+        .text-white {
+            color: #ffffff;
+        }
+
+        .page-header h1 {
+            text-align: center;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            margin-left: 5px;
+        }
+
+        .button-row {
+            margin-bottom: 10px;
+        }
+
+    </style>
+    {% block extra_css %}{% endblock extra_css %}
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="{% static 'theme-clm/js/html5shiv.min.js'%}"></script>
+    <script src="{% static 'theme-clm/js/respond.min.js' %}"></script>
+    <![endif]-->
+</head>
+<body>
+<!-- Static navbar -->
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Optimus</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Legal Contract Management<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'legal:list' %}">Contract List</a></li>
+                        <li><a href="{% url 'legal:create' %}">Submit New Contract Request</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="{% url 'contracts-list' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Backmargin management <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'contracts-list' %}">List all backmargin agreements</a></li>
+                        <li><a href="{% url 'contract-create-form' %}">Register new backmargin agreement</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if request.user.is_authenticated %}
+                    <li><p class="navbar-text"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ request.user.email }}</p></li>
+                    <li><a href="{% url 'django.contrib.auth.views.logout' %}">Log Out <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span></a></li>
+                {% else %}
+                    <li><a href="/saml2/login/"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+{% block page-header %}{% endblock %}
+
+{% if messages %}
+    {% regroup messages by tags as messages %}
+    <!-- Alert Messsages -->
+    <div class="container">
+        {% for tags in messages %}
+            {% if tags.grouper == 'error' %}
+                <div class="alert alert-danger" role="alert">
+                    <ul class="{{ tags.grouper }}">
+                        {% for message in tags.list %}
+                            <li><strong>{{ message|capfirst }}</strong></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% elif tags.grouper == 'success' %}
+                <div class="alert alert-success" role="alert">
+                    <ul class="{{ tags.grouper }}">
+                        {% for message in tags.list %}
+                            <li>{{ message|capfirst }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% else %}
+                <div class="alert alert-info" role="alert">
+                    <ul class="{{ tags.grouper }}">
+                        {% for message in tags.list %}
+                            <li>{{ message|capfirst }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endif %}
+
+
+<div class="container-fluid">
+    {% block content %}{% endblock %}
+</div>
+
+<!-- Placed at the end of the document so the pages load faster -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="{% static 'theme-clm/js/jquery-3.1.1.min.js' %}"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="{% static 'theme-clm/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'theme-clm/js/bootstrap-datepicker.js' %}"></script>
+<script type="text/javascript" src="{% static 'theme-clm/js/bootstrap-table.min.js' %}"></script>
+{% block extra_js %}{% endblock extra_js %}
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-68429983-4', 'auto');
+    ga('require', 'linkid');
+    ga('send', 'pageview');
+</script>
+</body>
+</html>
