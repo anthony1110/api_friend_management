@@ -11,7 +11,6 @@ This API local server developed using python-django web framework. This project 
     a. "source venv/bin/activate"
 
 4. create local mysql database. If not, you can modify at <project>/friend_management/settings.py
-
     database_name: friend_management
     database_user: root
     database_password: root
