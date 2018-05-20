@@ -19,11 +19,15 @@ This API local server developed using python-django web framework. This project 
     a. "pip install -r requirements.txt"
 
 6. go to project directory that has manage.py and run command below to create DB tables.<br />
-    a. "python manage makemigrations"<br />
-    b. "python manage migrate"
+    a. "python manage.py makemigrations"<br />
+    b. "python manage.py migrate"
 
 7. run at local server with command below at 127.0.0.1:8000.<br />
-    a. "python manage runserver"
+    a. "python manage.py runserver"
+
+8. run test for api.
+    a. "python manage.py test"
+
 
 <br />
 Project API.<br />
