@@ -10,7 +10,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse
 from django.db.models import Q
-from django.http.response import HttpResponseRedirect, JsonResponse
+from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views import generic
 from django.views.decorators.csrf import csrf_exempt
@@ -30,10 +30,11 @@ class AddFriendView(APIView):
 
     def post(self, request, *args, **kwargs):
         result = {"success": False, "message": "something wrong."}
-        data = dict(request.data.items())
+        data = dict(request.data)
 
         if 'friends' in data:
-            email_list = data.get('friends')
+            email_list = data.get("friends")
+
             if len(email_list) == 2:
                 friend1 = get_valid_email(email_list[0])
                 friend2 = get_valid_email(email_list[1])
@@ -55,7 +56,7 @@ class AddFriendView(APIView):
                 else:
                     result = {"success": False, "message": "Need to provide 2 valid emails."}
             else:
-                result = {"success": False, "message": "Need to provide 2 valid emails."}
+                result = {"success": False, "message": "Need to provide 2 emails."}
 
         return JsonResponse(result)
 
@@ -64,7 +65,7 @@ class FriendListView(APIView):
 
     def post(self, request, *args, **kwargs):
         result = {"success": False, "message": "something wrong."}
-        data = dict(request.data.items())
+        data = dict(request.data)
 
         if 'email' in data:
             target_email = get_valid_email(data.get('email'))
@@ -90,7 +91,7 @@ class CommonFriendListView(APIView):
 
     def post(self, request, *args, **kwargs):
         result = {"success": False, "message": "something wrong."}
-        data = dict(request.data.items())
+        data = dict(request.data)
 
         if 'friends' in data:
             email_list = data.get('friends')
@@ -130,7 +131,7 @@ class CommonFriendListView(APIView):
                 else:
                     result = {"success": False, "message": "Need to provide 2 valid emails."}
             else:
-                result = {"success": False, "message": "Need to provide 2 valid emails."}
+                result = {"success": False, "message": "Need to provide 2 emails."}
 
         return JsonResponse(result)
 
@@ -139,7 +140,7 @@ class SubscribeUpdateView(APIView):
 
     def post(self, request, *args, **kwargs):
         result = {"success": False, "message": "something wrong."}
-        data = dict(request.data.items())
+        data = dict(request.data)
 
         if 'requestor' in data and 'target' in data:
             requestor = get_valid_email(data.get('requestor'))
@@ -163,7 +164,7 @@ class BlockFriendView(APIView):
 
     def post(self, request, *args, **kwargs):
         result = {"success": False, "message": "something wrong."}
-        data = dict(request.data.items())
+        data = dict(request.data)
 
         if 'requestor' in data and 'target' in data:
             requestor = get_valid_email(data.get('requestor'))
@@ -191,7 +192,7 @@ class SendMessageView(APIView):
 
     def post(self, request, *args, **kwargs):
         result = {"success": False, "message": "something wrong."}
-        data = dict(request.data.items())
+        data = dict(request.data)
 
         if 'sender' in data and 'text' in data:
             sender = get_valid_email(data.get('sender'))

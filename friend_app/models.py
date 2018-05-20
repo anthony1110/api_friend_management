@@ -24,17 +24,25 @@ class BlockedList(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
 
+    class Meta:
+        unique_together = ('requestor', 'target',)
 
 class SubscribeList(models.Model):
     requestor = models.EmailField()
     target = models.EmailField()
+    created_at = models.DateTimeField(auto_now_add=True, editable=False)
 
+    class Meta:
+        unique_together = ('requestor', 'target',)
 
 class Friend(models.Model):
     email1 = models.EmailField()
     email2 = models.EmailField()
 
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
+
+    class Meta:
+        unique_together = ('email1', 'email2',)
 
     @classmethod
     def get_friend_email_list(cls, target_email):

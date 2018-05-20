@@ -2,6 +2,7 @@ import re
 
 
 def get_valid_email(email):
-    if not re.match(r'[\w\.-_]+@[\w\.-_]+', email):
+
+    if re.match(r"[\w\.-]+@[\w\.-]+", email) is not None:
         return email
     return None
