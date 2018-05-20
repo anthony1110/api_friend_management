@@ -25,7 +25,7 @@ This API local server developed using python-django web framework. This project 
 7. run at local server with command below at 127.0.0.1:8000.<br />
     a. "python manage.py runserver"
 
-8. run test for api.
+8. run test for api.<br />
     a. "python manage.py test"
 
 
