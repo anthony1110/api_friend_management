@@ -33,3 +33,7 @@ Project API.<br />
 4. http://127.0.0.1:8000/friend/subscribe_update    POST method<br />
 5. http://127.0.0.1:8000/friend/block_friend        POST method<br />
 6. http://127.0.0.1:8000/friend/send_message        POST method
+
+
+
+contact kahfai1110@gmail.com for more info. 
