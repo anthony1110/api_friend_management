@@ -125,7 +125,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 ADMINS = (
-    ('Chris Chong', 'kahfai.chong@lazada.com'),
+    ('Chris Chong', 'kahfai1110@gmail.com'),
 )
 
 
