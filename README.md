@@ -4,7 +4,7 @@ This API local server developed using python-django web framework. This project 
 
 1. install python3, virtualenv for local environment.
 
-2. setup local environment with virtualenv
+2. setup local environment with virtualenv <br />
     "virtualenv -p python3 venv"
 
 3. activate your local environment
