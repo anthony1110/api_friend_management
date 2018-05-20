@@ -26,10 +26,10 @@ This API local server developed using python-django web framework. This project 
     a. "python manage runserver"
     
 <br />
-Project API.
-1. http://127.0.0.1:8000/friend/add_friend          POST method
-2. http://127.0.0.1:8000/friend/friend_list         POST method
-3. http://127.0.0.1:8000/friend/common_friend_list  POST method
-4. http://127.0.0.1:8000/friend/subscribe_update    POST method
-5. http://127.0.0.1:8000/friend/block_friend        POST method
+Project API.<br />
+1. http://127.0.0.1:8000/friend/add_friend          POST method<br />
+2. http://127.0.0.1:8000/friend/friend_list         POST method<br />
+3. http://127.0.0.1:8000/friend/common_friend_list  POST method<br />
+4. http://127.0.0.1:8000/friend/subscribe_update    POST method<br />
+5. http://127.0.0.1:8000/friend/block_friend        POST method<br />
 6. http://127.0.0.1:8000/friend/send_message        POST method
